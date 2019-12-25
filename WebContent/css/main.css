@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+#rangeMaxOfResult-custom-handle1 {
+	width: 2em;
+	height: 1.5em;
+	top: 50%;
+	margin-top: -.8em;
+	text-align: center;
+	line-height: 1.6em;
+}
+
+#rangeMaxOfResult-custom-handle2 {
+	width: 2em;
+	height: 1.5em;
+	top: 50%;
+	margin-top: -.8em;
+	text-align: center;
+	line-height: 1.6em;
+}

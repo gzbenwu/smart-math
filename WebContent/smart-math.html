@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Math!</title>
+<link rel="stylesheet"
+	href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+	
+</script>
+<style>
+</style>
+</head>
+<body>
+	<span id="basic-item"
+		style="display: none; font-weight: bold; font-size: 24px; margin: 20px;">---</span>
+	<div data-role="page" id="page-main">
+		<div class="ui-grid-c">
+			<div class="ui-block-a">
+				<button class="ui-btn ui-btn-b ui-corner-all"
+					style="text-align: right;">题数：</button>
+			</div>
+			<div class="ui-grid-solo">
+				<div class="ui-block-a">
+					<select id="select-formulaCount" data-native-menu="false"><option
+							value="5">5题</option>
+						<option value="10">10题</option>
+						<option value="15">15题</option>
+						<option value="20">20题</option>
+						<option value="25">25题</option>
+						<option value="30">30题</option>
+						<option value="50">50题</option>
+						<option value="100">100题</option></select>
+				</div>
+			</div>
+		</div>
+		<div class="ui-grid-b">
+			<div class="ui-block-a">
+				<button class="ui-btn ui-btn-b ui-corner-all"
+					style="text-align: right;">结果范围：</button>
+			</div>
+			<div class="ui-grid-solo">
+				<div class="ui-block-a">
+					<input type="button" data-icon="edit" data-iconpos="right"
+						id="disp-rangeOfResult" value="0 ~ 20"
+						onclick="javascript:$('#ref-page-rangeOfResult').click();"></input>
+					<a id="ref-page-rangeOfResult" href="#page-rangeOfResult"
+						style="display: none;">~</a>
+				</div>
+			</div>
+		</div>
+		<div class="ui-grid-solo">
+			<div class="ui-block-a">
+				<input type="button" onclick="javascript:generate();" value="出    题">
+			</div>
+		</div>
+		<div class="ui-grid-solo">
+			<div id="blackboard"></div>
+		</div>
+	</div>
+	<div data-role="page" id="page-rangeOfResult">
+		<div class="ui-grid-solo" style="padding: 5px;">
+			<button class="ui-btn ui-btn-b ui-corner-all">结果范围</button>
+			<input type="range" id="rangeMinOfResult" data-highlight="true"
+				min="0" max="95" step="5" value="0"><input type="range"
+				id="rangeMaxOfResult" data-highlight="true" min="5" max="100"
+				step="5" value="20"> <input type="button"
+				onclick="javascript:setRangeOfResult();" value="确    定"> <a
+				id="ref-page-main" href="#page-main" style="display: none;">~</a>
+		</div>
+	</div>
+</body>
+</html>
