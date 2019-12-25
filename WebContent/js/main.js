@@ -41,43 +41,55 @@ function getFormula() {
 
 function display() {
 	$("#blackboard").html("");
+	var start = new Date().getTime();
 	for (var i = 0; i < formulaCount; i++) {
 		var formula = getFormula();
 		while (formula == null) {
 			formula = getFormula();
+			var now = new Date().getTime();
+			if ((start + (2 * 1000)) < now) {
+				break;
+			}
 		}
 		var newItem = $("#basic-item").clone();
 		newItem.css("display", "block");
-		newItem.html(formula);
+		newItem.html(formula == null ? "无法出题！请检查参数组合是否有问题！" : formula);
 		$("#blackboard").append(newItem);
+		if (formula == null) {
+			break;
+		}
 	}
 }
 
-function reflushParams() {
-	formulaCount = 1*$("#select-formulaCount").val();
-	rangeMinOfResult = 1*$("#rangeMinOfResult").val();
-	rangeMaxOfResult = 1*$("#rangeMaxOfResult").val();
-
-	if (rangeMaxOfDigital < rangeMinOfResult) {
-		return true;
-	}
-	return false;
-}
-
-function generate() {
-	if (reflushParams()) {
-		alert("数字范围太小，无法计算出设定的结果范围值！");
+function setupConfirm() {
+	if (1 * $("#rangeMinOfDigital").val() >= 1 * $("#rangeMaxOfDigital").val()) {
+		alert("数字范围数值不对！" + $("#rangeMinOfDigital").val() + " > " + $("#rangeMaxOfDigital").val() + "?!");
 		return;
 	}
-	display();
-}
-
-function setRangeOfResult() {
-	if (1*$("#rangeMinOfResult").val() >= 1*$("#rangeMaxOfResult").val()) {
-		alert("数值不对！"+ $("#rangeMinOfResult").val() + " - " + $("#rangeMaxOfResult").val());
+	if (1 * $("#rangeMinOfResult").val() >= 1 * $("#rangeMaxOfResult").val()) {
+		alert("结果范围数值不对！" + $("#rangeMinOfResult").val() + " > " + $("#rangeMaxOfResult").val() + "?!");
 		return;
 	}
-	$("#disp-rangeOfResult").val($("#rangeMinOfResult").val() + " ~ " + $("#rangeMaxOfResult").val());
-	$("#disp-rangeOfResult").button("refresh");
+
+	formulaCount = 1 * $("#select-formulaCount").val();
+	rangeMinOfDigital = 1 * $("#rangeMinOfDigital").val();
+	rangeMaxOfDigital = 1 * $("#rangeMaxOfDigital").val();
+	rangeMinOfResult = 1 * $("#rangeMinOfResult").val();
+	rangeMaxOfResult = 1 * $("#rangeMaxOfResult").val();
+	// if (rangeMaxOfDigital < rangeMinOfResult) {
+	// alert("数字范围与结果范围数值相差太大，无法出题！");
+	// return;
+	// }
+	// if (rangeMaxOfResult < rangeMinOfDigital) {
+	// alert("数字范围与结果范围数值相差太大，无法出题！");
+	// return;
+	// }
+	// $("#disp-rangeOfResult").val($("#rangeMinOfResult").val() + " ~ " +
+	// $("#rangeMaxOfResult").val());
+	// $("#disp-rangeOfResult").button("refresh");
 	$('#ref-page-main').click();
+}
+
+function clearBoard() {
+	$("#blackboard").html("");
 }
