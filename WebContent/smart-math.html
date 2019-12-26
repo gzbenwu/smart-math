@@ -9,16 +9,21 @@
 <script src="js/jquery-1.12.4.min.js"></script>
 <script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script src="js/main.js"></script>
-<script type="text/javascript">
-	
-</script>
+<script src="js/ui.js"></script>
 <style>
 </style>
 </head>
 <body>
 	<span id="basic-item"
 		style="display: none; font-weight: bold; font-size: 24px; margin: 20px;">---</span>
+
 	<div data-role="page" id="page-main">
+		<button id="loadingon" class="show-page-loading-msg"
+			style="display: none;" data-theme="b" data-textonly="false"
+			data-textvisible="true" data-msgtext="正在出题 ..." data-inline="true">Show</button>
+		<button id="loadingoff" class="hide-page-loading-msg"
+			style="display: none;" data-inline="true" data-icon="delete">Hide</button>
+
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 				<a onclick="javascript:clearBoard();"
@@ -31,18 +36,21 @@
 					置</a>
 			</div>
 		</div>
+
 		<div class="ui-grid-solo"
 			style="padding-left: 5px; padding-right: 5px;">
 			<a onclick="javascript:display();"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-eye">出
 				题</a>
 		</div>
+
 		<div id="blackboard" class="ui-grid-solo"
 			style="padding-left: 5px; padding-right: 5px;"></div>
 	</div>
 	<div data-role="page" id="page-settings">
 		<div class="ui-grid-solo" style="padding: 5px;">
-			<button class="ui-btn ui-btn-b ui-corner-all">题 数</button>
+			<div class="ui-bar ui-bar-b ui-corner-all"
+				style="text-align: center;">题 数</div>
 			<select id="select-formulaCount" data-native-menu="false"><option
 					value="5">5题</option>
 				<option value="10">10题</option>
@@ -53,20 +61,25 @@
 				<option value="50">50题</option>
 				<option value="100">100题</option></select>
 		</div>
+
 		<div class="ui-grid-solo" style="padding: 5px;">
-			<button class="ui-btn ui-btn-b ui-corner-all">数字范围</button>
+			<div class="ui-bar ui-bar-b ui-corner-all"
+				style="text-align: center;">数字范围</div>
 			<input type="range" id="rangeMinOfDigital" data-highlight="true"
 				min="0" max="95" step="1" value="0"><input type="range"
 				id="rangeMaxOfDigital" data-highlight="true" min="5" max="100"
 				step="1" value="20">
 		</div>
+
 		<div class="ui-grid-solo" style="padding: 5px;">
-			<button class="ui-btn ui-btn-b ui-corner-all">结果范围</button>
+			<div class="ui-bar ui-bar-b ui-corner-all"
+				style="text-align: center;">结果范围</div>
 			<input type="range" id="rangeMinOfResult" data-highlight="true"
 				min="0" max="95" step="1" value="0"><input type="range"
 				id="rangeMaxOfResult" data-highlight="true" min="5" max="100"
 				step="1" value="20">
 		</div>
+
 		<div class="ui-grid-solo" style="padding: 5px;">
 			<a onclick="javascript:setupConfirm();"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check">确
