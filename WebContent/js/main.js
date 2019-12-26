@@ -1,3 +1,4 @@
+var stat_mark = "(?)";
 var rangeMinOfDigital = 0;
 var rangeMaxOfDigital = 20;
 var rangeMinOfResult = 0;
@@ -12,9 +13,26 @@ function getRndInteger(min, max) {
 function getFormula() {
 	var p1 = getRndInteger(rangeMinOfDigital, rangeMaxOfDigital);
 	var p2 = getRndInteger(rangeMinOfDigital, rangeMaxOfDigital);
+	if (p2 == p1) {
+		if (getRndInteger(0, 1) == 0) {
+			p2 = getRndInteger(rangeMinOfDigital, rangeMaxOfDigital);
+		}
+	}
+
 	var p3 = getRndInteger(rangeMinOfDigital, rangeMaxOfDigital);
+	if (p3 == p2) {
+		if (getRndInteger(0, 1) == 0) {
+			p3 = getRndInteger(rangeMinOfDigital, rangeMaxOfDigital);
+		}
+	}
+
 	var m1 = getRndInteger(0, 1);
 	var m2 = getRndInteger(0, 1);
+	if (m2 == m1) {
+		if (getRndInteger(0, 1) == 0) {
+			m2 = getRndInteger(0, 1);
+		}
+	}
 
 	var tmp;
 	if (m1 == 0) {
@@ -36,5 +54,5 @@ function getFormula() {
 		return null;
 	}
 
-	return p1 + (m1 == 0 ? "-" : "+") + p2 + (m2 == 0 ? "-" : "+") + p3 + "=";
+	return p1 + (m1 == 0 ? "-" : "+") + p2 + (m2 == 0 ? "-" : "+") + p3 + "=" + stat_mark;
 }
