@@ -3,7 +3,7 @@ var stat_mark = "(?)";
 var formulaCount = 5;
 var digitalCount = 3;
 var hidResult = true;
-var hidDigitalCount = 1;
+var hidDigitalCount = 0;
 var hidSignCount = 0;
 var rangeMinOfDigital = 0;
 var rangeMaxOfDigital = 20;
@@ -89,8 +89,32 @@ function getFormula() {
 	}
 	pMap["P" + getJsonLength(pMap)] = result[0];
 	var formula = formula + "=P(" + (getJsonLength(pMap) - 1) + ")";
+	var pIdx = getJsonLength(pMap);
+	var sIdx = getJsonLength(sMap);
 
 	var valueResult = fillIn(formula, pMap, sMap);
+
+	if (hidResult) {
+		if (hidDigitalCount == 0) {
+			pMap["P" + (pIdx - 1)] = stat_mark;
+		} else {
+			var map = {};
+			for (var i = 0; i < pIdx; i++) {
+				map["p" + i] = i;
+			}
+			var toHid = [];
+			for (var i = 0; (i < pIdx - 1 && i < hidDigitalCount); i++) {
+				var size = getJsonLength(map);
+				var random = getRndInteger(0, size - 1);
+				toHid[toHid.length] = removeJsonValueByIndex(map, random);
+			}
+			for (var i = 0; i < toHid.length; i++) {
+				pMap["P" + toHid[i]] = stat_mark;
+			}
+		}
+	} else {
+
+	}
 	var hidFormula = fillIn(formula, pMap, sMap);
 
 	var f = [];
