@@ -1,4 +1,5 @@
-var stat_mark = "(?)";
+var mark_digital = "(?)";
+var mark_sign = "(!)";
 
 var formulaCount = 5;
 var digitalCount = 3;
@@ -96,31 +97,36 @@ function getFormula() {
 
 	if (hidResult) {
 		if (hidDigitalCount == 0) {
-			pMap["P" + (pIdx - 1)] = stat_mark;
+			pMap["P" + (pIdx - 1)] = mark_digital;
 		} else {
-			var map = {};
-			for (var i = 0; i < pIdx; i++) {
-				map["p" + i] = i;
-			}
-			var toHid = [];
-			for (var i = 0; (i < pIdx - 1 && i < hidDigitalCount); i++) {
-				var size = getJsonLength(map);
-				var random = getRndInteger(0, size - 1);
-				toHid[toHid.length] = removeJsonValueByIndex(map, random);
-			}
-			for (var i = 0; i < toHid.length; i++) {
-				pMap["P" + toHid[i]] = stat_mark;
-			}
+			randomMark(pIdx, hidDigitalCount, pMap, "P", mark_digital)
 		}
 	} else {
-
+		randomMark(pIdx - 1, hidDigitalCount, pMap, "P", mark_digital)
 	}
+	randomMark(sIdx, hidSignCount, sMap, "S", mark_sign)
 	var hidFormula = fillIn(formula, pMap, sMap);
 
 	var f = [];
 	f[0] = hidFormula;
 	f[1] = valueResult;
 	return f;
+}
+
+function randomMark(maxIdx, hidCount, theMap, sign, mark) {
+	var map = {};
+	for (var i = 0; i < maxIdx; i++) {
+		map[sign + i] = i;
+	}
+	var toHid = [];
+	for (var i = 0; (i < maxIdx - 1 && i < hidCount); i++) {
+		var size = getJsonLength(map);
+		var random = getRndInteger(0, size - 1);
+		toHid[toHid.length] = removeJsonValueByIndex(map, random);
+	}
+	for (var i = 0; i < toHid.length; i++) {
+		theMap[sign + toHid[i]] = mark;
+	}
 }
 
 function fillIn(formula, pMap, sMap) {
