@@ -6,6 +6,7 @@ var rangeMinOfResult = 0;
 var rangeMaxOfResult = 20;
 var formulaCount = 5;
 var digitalCount = 3;
+var hidResult = true;
 
 function getNextFormula(pMap, sMap, lastDgital, lastSign, lastResult) {
 	var s = getRndInteger(0, 1);
@@ -83,7 +84,7 @@ function getFormula() {
 		var blank = "P(" + i + ")";
 		valueResult = valueResult.replace(blank, pMap[key]);
 	}
-	valueResult += "=" + result[0];
+	valueResult += "=" + (hidResult ? "(?)" : result[0]);
 
 	var f = [];
 	f[0] = valueResult;

@@ -75,6 +75,20 @@
 		</div>
 
 		<div class="ui-grid-solo" style="padding: 5px;">
+			<div class="ui-grid-b">
+				<div class="ui-block-a" style="padding-right: 5px;">
+					<button data-mini="true" data-theme="b" style="text-align: right;">隐藏答案：</button>
+				</div>
+				<div class="ui-block-b">
+					<select name="hid-result" id="hid-result" data-role="flipswitch">
+						<option value="false">否</option>
+						<option value="true" selected>是</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui-grid-solo" style="padding: 5px;">
 			<div class="ui-bar ui-bar-b ui-corner-all"
 				style="text-align: center;">数字范围</div>
 			<input type="range" id="rangeMinOfDigital" data-highlight="true"

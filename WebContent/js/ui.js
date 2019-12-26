@@ -48,6 +48,7 @@ function setupConfirm() {
 	rangeMaxOfDigital = 1 * $("#rangeMaxOfDigital").val();
 	rangeMinOfResult = 1 * $("#rangeMinOfResult").val();
 	rangeMaxOfResult = 1 * $("#rangeMaxOfResult").val();
+	hidResult = $("#hid-result").val() == "true";
 	// if (rangeMaxOfDigital < rangeMinOfResult) {
 	// alert("数字范围与结果范围数值相差太大，无法出题！");
 	// return;
