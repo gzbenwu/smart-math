@@ -13,8 +13,12 @@
 <script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-	<span id="basic-item"
-		style="display: none; font-weight: bold; font-size: 24px; margin: 20px;">---</span>
+	<div id="basic-item"
+		style="display: none; font-weight: bold; font-size: 24px; margin: 20px;">
+		<span id="formula" onclick="javascript:showResult(this);"></span><span
+			id="result" onclick="javascript:showResult(this);"
+			style="color: red; display: none;"></span>
+	</div>
 
 	<div data-role="page" id="page-main">
 		<button id="loadingon" class="show-page-loading-msg"

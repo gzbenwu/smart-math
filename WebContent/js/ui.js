@@ -46,13 +46,25 @@ function generate() {
 		var formula = getFormula();
 		var newItem = $("#basic-item").clone();
 		newItem.css("display", "block");
-		newItem.html(formula == null ? "出题耗时太长！请检查并放宽参数组合条件！" : (formula[0] + "|" + formula[1]));
+		var formulaI = $("#formula", newItem);
+		var resultI = $("#result", newItem);
+		formulaI.prop("lto", resultI);
+		resultI.prop("lto", formulaI);
+		formulaI.html(formula == null ? "出题耗时太长！请检查并放宽参数组合条件！" : formula[0]);
+		resultI.html(formula == null ? "" : formula[1]);
 		$("#blackboard").append(newItem);
 		if (formula == null) {
 			break;
 		}
 	}
 	$('#loadingoff').click();
+}
+
+function showResult(item) {
+	var t = $(item)
+	t.css("display", "none");
+	var l = $(item).prop("lto");
+	l.css("display", "block");
 }
 
 function display() {
