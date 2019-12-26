@@ -14,19 +14,11 @@ $(document).on("click", ".show-page-loading-msg", function() {
 
 function generate() {
 	$("#blackboard").html("");
-	var start = new Date().getTime();
 	for (var i = 0; i < formulaCount; i++) {
 		var formula = getFormula();
-		while (formula == null) {
-			formula = getFormula();
-			var now = new Date().getTime();
-			if ((start + (3 * 1000)) < now) {
-				break;
-			}
-		}
 		var newItem = $("#basic-item").clone();
 		newItem.css("display", "block");
-		newItem.html(formula == null ? "无法出题！请检查参数组合是否有问题！" : formula);
+		newItem.html(formula == null ? "出题耗时太长！请检查并放宽参数组合！" : formula);
 		$("#blackboard").append(newItem);
 		if (formula == null) {
 			break;
@@ -51,6 +43,7 @@ function setupConfirm() {
 	}
 
 	formulaCount = 1 * $("#select-formulaCount").val();
+	digitalCount = 1 * $("#select-digitalCount").val();
 	rangeMinOfDigital = 1 * $("#rangeMinOfDigital").val();
 	rangeMaxOfDigital = 1 * $("#rangeMaxOfDigital").val();
 	rangeMinOfResult = 1 * $("#rangeMinOfResult").val();
