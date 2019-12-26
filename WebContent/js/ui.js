@@ -18,7 +18,7 @@ function generate() {
 		var formula = getFormula();
 		var newItem = $("#basic-item").clone();
 		newItem.css("display", "block");
-		newItem.html(formula == null ? "出题耗时太长！请检查并放宽参数组合！" : formula);
+		newItem.html(formula == null ? "出题耗时太长！请检查并放宽参数组合！" : formula[0]);
 		$("#blackboard").append(newItem);
 		if (formula == null) {
 			break;
