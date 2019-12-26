@@ -1,12 +1,27 @@
 var stat_mark = "(?)";
 
-var rangeMinOfDigital = 0;
-var rangeMaxOfDigital = 20;
-var rangeMinOfResult = 0;
-var rangeMaxOfResult = 20;
 var formulaCount = 5;
 var digitalCount = 3;
 var hidResult = true;
+var hidDigitalCount = 1;
+var hidSignCount = 0;
+var rangeMinOfDigital = 0;
+var rangeMaxOfDigital = 20;
+var rangeMinOfResult = 1;
+var rangeMaxOfResult = 30;
+
+var minOfMinDigital = 0;
+var maxOfMinDigital = 100;
+var stepOfMinDigital = 1;
+var minOfMaxDigital = 0;
+var maxOfMaxDigital = 100;
+var stepOfMaxDigital = 1;
+var minOfMinResult = 0;
+var maxOfMinResult = 100;
+var stepOfMinResult = 1;
+var minOfMaxResult = 0;
+var maxOfMaxResult = 100;
+var stepOfMaxResult = 1;
 
 function getNextFormula(pMap, sMap, lastDgital, lastSign, lastResult) {
 	var s = getRndInteger(0, 1);
@@ -72,21 +87,31 @@ function getFormula() {
 		s = result[2];
 		r = result[0];
 	}
+	pMap["P" + getJsonLength(pMap)] = result[0];
+	var formula = formula + "=P(" + (getJsonLength(pMap) - 1) + ")";
 
-	var valueResult = formula;
-	for (var i = 0; i < getJsonLength(sMap); i++) {
-		var key = "S" + i;
-		var blank = "S(" + i + ")";
-		valueResult = valueResult.replace(blank, sMap[key]);
-	}
-	for (var i = 0; i < getJsonLength(pMap); i++) {
-		var key = "P" + i;
-		var blank = "P(" + i + ")";
-		valueResult = valueResult.replace(blank, pMap[key]);
-	}
-	valueResult += "=" + (hidResult ? "(?)" : result[0]);
+	var valueResult = fillIn(formula, pMap, sMap);
+	var hidFormula = fillIn(formula, pMap, sMap);
 
 	var f = [];
-	f[0] = valueResult;
+	f[0] = hidFormula;
+	f[1] = valueResult;
+	return f;
+}
+
+function fillIn(formula, pMap, sMap) {
+	var f = formula;
+	var pIdx = getJsonLength(pMap);
+	var sIdx = getJsonLength(sMap);
+	for (var i = 0; i < sIdx; i++) {
+		var key = "S" + i;
+		var blank = "S(" + i + ")";
+		f = f.replace(blank, sMap[key]);
+	}
+	for (var i = 0; i < pIdx; i++) {
+		var key = "P" + i;
+		var blank = "P(" + i + ")";
+		f = f.replace(blank, pMap[key]);
+	}
 	return f;
 }
